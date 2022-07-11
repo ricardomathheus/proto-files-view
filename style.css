@@ -1,5 +1,15 @@
-body {
+[theme="terminal"] {
     background-color: black;
     color: white;
 }
 
+[theme="files"] {
+    background-color: #202020;
+    color: white;
+}
+
+
+
+.object .value{
+    color: blanchedalmond;
+}

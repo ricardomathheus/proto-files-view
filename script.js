@@ -2,20 +2,32 @@ function mainJsScript(newLocal= window) {
     const display = document.querySelector('main')
     let local = newLocal
 
+    function objectToArray(object) {
+        //Object.getOwnPropertyNames(Object.getPrototypeOf(document.__proto__))
+        const objectProtoType = Object.getPrototypeOf(object.__proto__)
+        const objectProtoTypePropertyNames = Object.getOwnPropertyNames(objectProtoType)
+
+        return objectProtoTypePropertyNames.map(propertyName => {
+            return [propertyName, object[propertyName]]
+        })
+    }
+    
     function objectToHTML(object) {
-        const objectArray = Object.entries(object)
+        
+        const objectArray = (object === window) ? Object.entries(object) : objectToArray(object)
 
         let lineNumber = 0
         const HTMLArray = objectArray.map(element => {
             const [property, value] = element
             lineNumber++
 
+
             const HTMLForValues = {
                 object: 
                     [
                         `<p class="object" id="line${lineNumber}">`,
                             `<span>${property}: </span>`,
-                            `<button value="${property}">${value}</button>`,
+                            `<span class="value">${value}</span>`,
                         `</p>`
                     ].join(''),
 
@@ -46,7 +58,7 @@ function mainJsScript(newLocal= window) {
 
             return HTMLForValues[typeof (value)] ? 
                 HTMLForValues[typeof (value)] : 
-                `${property}: ${value}`
+                `<p>${property}: ${value}</p>`
         })
 
         return HTMLArray.join('')
