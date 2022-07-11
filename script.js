@@ -1,27 +1,30 @@
-const display = document.querySelector('main')
+function mainJsScript() {
+    const display = document.querySelector('main')
 
-function getPropertyAndValuesOfAProtoTypeObject(object) {
-    const objectProto = Object.getPrototypeOf(object.__proto__)
-    const objectKeys = Object.getOwnPropertyNames(objectProto)
+    let local = window
+    function objectToHTML(object) {
+        const objectProperty = Object.entries(object)
+        
+        return objectProperty.map(element => {
+            const [property, value] = element
 
-    return objectKeys.map(element => {
-        const property = element
-        const propertyValue = object[element]
-        return [property, propertyValue]
-    })
+            if (typeof(value) === "object") {
+                return `<p>${property}: <a href="${window.location + '?local=' + property}">${value}</a></p>`
+            }
+
+            return `<p>${property}: ${value}</p>`
+        }).join('')
+    }
+
+    function load() {
+        const NewURLSearchParams = new URLSearchParams(window.location.search)
+        const URLParams = NewURLSearchParams.get('local')
+        console.log(URLParams)
+
+        local = local[URLParams] ? local[URLParams] : local
+        display.innerHTML = `${objectToHTML(local)}`
+        
+    }
+    load()
 }
-
-function objectToSring(object) {
-    const propertyAndValue = getPropertyAndValuesOfAProtoTypeObject(object)
-
-    let string = ''
-    propertyAndValue.forEach(element => {
-        const property = element[0]
-        const propertyValue = element[1]
-        string += `${property}: ${propertyValue}\n`
-    })
-
-    return string
-}
-
-display.innerHTML = `<pre>${objectToSring(document)}</pre>`
+mainJsScript()
