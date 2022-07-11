@@ -1,7 +1,7 @@
 function mainJsScript() {
     const display = document.querySelector('main')
-
     let local = window
+
     function objectToHTML(object) {
         const objectProperty = Object.entries(object)
         
