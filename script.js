@@ -21,44 +21,76 @@ function mainJsScript(newLocal= window) {
             const [property, value] = element
             lineNumber++
 
-
+            const inputName = 'line'
             const HTMLForValues = {
                 object: 
                     [
-                        `<p class="object" id="line${lineNumber}">`,
-                            `<span>${property}: </span>`,
-                            `<span class="value">${value}</span>`,
-                        `</p>`
+                        `<div class="object line">`,
+                            `<input type="radio" name="${inputName}" id="inp${lineNumber}">`,
+                            `<label for="inp${lineNumber}" id="line${lineNumber}">`,
+                                `<span>${property}: </span>`,
+                                `<span class="value">${value}</span>`,
+                            `</label>`,
+                        `</div>`,
                     ].join(''),
 
                 function:
                     [
-                        `<p class="function" id="line${lineNumber}">`,
-                            `${property}: `,
-                            `<abbr title="${value}" style="color: yellow">function</abbr>`,
-                        `</p>`
+                        `<div class="function line">`,
+                            `<input type="radio" name="${inputName}" id="inp${lineNumber}">`,
+                            `<label for="inp${lineNumber}" id="line${lineNumber}">`,
+                                `${property}: `,
+                                `<abbr title="${value}" style="color: yellow">function</abbr>`,
+                            `</label>`,
+                        `</div>`,
                     ].join(''),
 
                 boolean:
                     [
-                        `<p class="boolean" id="line${lineNumber}">`,
-                            `${property}: `,
-                            `<span>${value}</span>`,
-                        `</p>`
+                        `<div class="boolean line">`,
+                            `<input type="radio" name="${inputName}" id="inp${lineNumber}">`,
+                            `<label for="inp${lineNumber}" id="line${lineNumber}">`,
+                                `${property}: `,
+                                `<span>${value}</span>`,
+                            `</label>`,
+                        `</div>`,
                     ].join(''),
 
                 number:
                     [
-                        `<p class="number" id="line${lineNumber}">`,
-                            `${property}: `,
-                            `<span>${value}</span>`,
-                        `</p>`
+                        `<div class="number line">`,
+                            `<input type="radio" name="${inputName}" id="inp${lineNumber}">`,
+                            `<label for="inp${lineNumber}" id="line${lineNumber}">`,
+                                `${property}: `,
+                                `<span>${value}</span>`,
+                            `</label>`,
+                        `</div>`,
+                    ].join(''),
+
+                string:
+                    [
+                        `<div class="string line">`,
+                            `<input type="radio" name="${inputName}" id="inp${lineNumber}">`,
+                            `<label for="inp${lineNumber}" id="line${lineNumber}">`,
+                                `${property}: `,
+                                `<span>${value}</span>`,
+                            `</label>`,
+                        `</div>`,
                     ].join(''),
             }
 
             return HTMLForValues[typeof (value)] ? 
                 HTMLForValues[typeof (value)] : 
-                `<p>${property}: ${value}</p>`
+                (                
+                    [
+                    `<div class="generic line">`,
+                        `<input type="radio" name="${inputName} id="inp${lineNumber}">`,
+                        `<label for="inp${lineNumber}" id="line${lineNumber}">`,
+                            `${property}: `,
+                            `<span>${value}</span>`,
+                        `</label>`,
+                    `</div>`,
+                ].join(''))
         })
 
         return HTMLArray.join('')
@@ -76,6 +108,6 @@ function mainJsScript(newLocal= window) {
             })
         })
     }
-    buttons()
+    //buttons()
 }
 mainJsScript()

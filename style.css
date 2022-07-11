@@ -8,8 +8,21 @@
     color: white;
 }
 
-
-
 .object .value{
     color: blanchedalmond;
+}
+
+
+.line label{
+    display: block;
+    padding: 0.2rem;
+}
+
+.line input {
+    display: none;
+}
+
+.line input:checked + label{
+    background-color: rgba(255, 255, 255, 0.363);
+
 }
