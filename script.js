@@ -1,30 +1,69 @@
-function mainJsScript() {
+function mainJsScript(newLocal= window) {
     const display = document.querySelector('main')
-    let local = window
+    let local = newLocal
 
     function objectToHTML(object) {
-        const objectProperty = Object.entries(object)
-        
-        return objectProperty.map(element => {
-            const [property, value] = element
+        const objectArray = Object.entries(object)
 
-            if (typeof(value) === "object") {
-                return `<p>${property}: <a href="${window.location + '?local=' + property}">${value}</a></p>`
+        let lineNumber = 0
+        const HTMLArray = objectArray.map(element => {
+            const [property, value] = element
+            lineNumber++
+
+            const HTMLForValues = {
+                object: 
+                    [
+                        `<p class="object" id="line${lineNumber}">`,
+                            `<span>${property}: </span>`,
+                            `<button value="${property}">${value}</button>`,
+                        `</p>`
+                    ].join(''),
+
+                function:
+                    [
+                        `<p class="function" id="line${lineNumber}">`,
+                            `${property}: `,
+                            `<abbr title="${value}" style="color: yellow">function</abbr>`,
+                        `</p>`
+                    ].join(''),
+
+                boolean:
+                    [
+                        `<p class="boolean" id="line${lineNumber}">`,
+                            `${property}: `,
+                            `<span>${value}</span>`,
+                        `</p>`
+                    ].join(''),
+
+                number:
+                    [
+                        `<p class="number" id="line${lineNumber}">`,
+                            `${property}: `,
+                            `<span>${value}</span>`,
+                        `</p>`
+                    ].join(''),
             }
 
-            return `<p>${property}: ${value}</p>`
-        }).join('')
+            return HTMLForValues[typeof (value)] ? 
+                HTMLForValues[typeof (value)] : 
+                `${property}: ${value}`
+        })
+
+        return HTMLArray.join('')
     }
 
-    function load() {
-        const NewURLSearchParams = new URLSearchParams(window.location.search)
-        const URLParams = NewURLSearchParams.get('local')
-        console.log(URLParams)
 
-        local = local[URLParams] ? local[URLParams] : local
-        display.innerHTML = `${objectToHTML(local)}`
-        
+
+    display.innerHTML =  objectToHTML(local)
+
+
+    function buttons() {
+        document.querySelectorAll('.object').forEach(element => {
+            element.addEventListener('click', e => {
+                mainJsScript(local[document.querySelector(`#${element.id} span`).innerText.replace(': ', '')])
+            })
+        })
     }
-    load()
+    buttons()
 }
 mainJsScript()
