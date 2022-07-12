@@ -25,9 +25,9 @@ function mainJsScript(newLocal= window) {
             const HTMLForValues = {
                 object: 
                     [
-                        `<div class="object line">`,
+                        `<div class="object line" id="line${lineNumber}">`,
                             `<input type="radio" name="${inputName}" id="inp${lineNumber}">`,
-                            `<label for="inp${lineNumber}" id="line${lineNumber}">`,
+                            `<label for="inp${lineNumber}" >`,
                                 `<span>${property}: </span>`,
                                 `<span class="value">${value}</span>`,
                             `</label>`,
@@ -36,8 +36,8 @@ function mainJsScript(newLocal= window) {
 
                 function:
                     [
-                        `<div class="function line">`,
-                            `<input type="radio" name="${inputName}" id="inp${lineNumber}">`,
+                        `<div class="function line" id="inp${lineNumber}">`,
+                            `<input type="radio" name="${inputName}">`,
                             `<label for="inp${lineNumber}" id="line${lineNumber}">`,
                                 `${property}: `,
                                 `<abbr title="${value}" style="color: yellow">function</abbr>`,
@@ -47,8 +47,8 @@ function mainJsScript(newLocal= window) {
 
                 boolean:
                     [
-                        `<div class="boolean line">`,
-                            `<input type="radio" name="${inputName}" id="inp${lineNumber}">`,
+                        `<div class="boolean line" id="inp${lineNumber}">`,
+                            `<input type="radio" name="${inputName}">`,
                             `<label for="inp${lineNumber}" id="line${lineNumber}">`,
                                 `${property}: `,
                                 `<span>${value}</span>`,
@@ -58,8 +58,8 @@ function mainJsScript(newLocal= window) {
 
                 number:
                     [
-                        `<div class="number line">`,
-                            `<input type="radio" name="${inputName}" id="inp${lineNumber}">`,
+                        `<div class="number line" id="inp${lineNumber}">`,
+                            `<input type="radio" name="${inputName}">`,
                             `<label for="inp${lineNumber}" id="line${lineNumber}">`,
                                 `${property}: `,
                                 `<span>${value}</span>`,
@@ -69,8 +69,8 @@ function mainJsScript(newLocal= window) {
 
                 string:
                     [
-                        `<div class="string line">`,
-                            `<input type="radio" name="${inputName}" id="inp${lineNumber}">`,
+                        `<div class="string line" id="inp${lineNumber}">`,
+                            `<input type="radio" name="${inputName}">`,
                             `<label for="inp${lineNumber}" id="line${lineNumber}">`,
                                 `${property}: `,
                                 `<span>${value}</span>`,
@@ -108,6 +108,6 @@ function mainJsScript(newLocal= window) {
             })
         })
     }
-    //buttons()
+    buttons()
 }
 mainJsScript()
